@@ -1,9 +1,9 @@
 """Fixed-destination HTTP adapters and weather-specific transformations."""
 
+import re
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import UTC
-import re
 
 import httpx
 from pydantic import ValidationError

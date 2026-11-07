@@ -1,5 +1,7 @@
 """Validated input/output contracts; missing values are never fabricated."""
 
+from __future__ import annotations
+
 from datetime import date, datetime
 from typing import Annotated
 
@@ -67,7 +69,7 @@ class ForecastDay(CleanModel):
     condition: str | None
 
     @model_validator(mode="after")
-    def check_temps(self) -> "ForecastDay":
+    def check_temps(self) -> ForecastDay:
         if self.temperature_min_c > self.temperature_max_c:
             raise ValueError("Minimum temperature exceeds maximum")
         return self
@@ -111,7 +113,7 @@ class MeteoDaily(CleanModel):
     precipitation_probability_max: list[int] | None = None
 
     @model_validator(mode="after")
-    def validate_lengths(self) -> "MeteoDaily":
+    def validate_lengths(self) -> MeteoDaily:
         size = len(self.time)
         arrays = [
             self.temperature_2m_min,

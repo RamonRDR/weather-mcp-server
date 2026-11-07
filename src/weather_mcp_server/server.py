@@ -1,6 +1,5 @@
 """Real MCP tools with typed schemas, safe public failures and stdio transport."""
 
-import logging
 from collections.abc import Awaitable, Callable
 from typing import Annotated, TypeVar
 
