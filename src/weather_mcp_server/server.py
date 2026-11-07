@@ -5,6 +5,7 @@ from typing import Annotated, TypeVar
 
 from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
+from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from weather_mcp_server.config import Settings
@@ -39,12 +40,12 @@ def create_server(
             logger.error("unexpected_tool_failure", exc_info=True)
             raise ToolError("Unexpected weather service failure.") from None
 
-    @server.tool()
+    @server.tool(annotations=ToolAnnotations(read_only_hint=True, open_world_hint=True))
     async def get_current_weather(city: City) -> WeatherReport:
         """Read current weather for a city with units, observation time and source."""
         return await invoke(lambda: service.current(city))
 
-    @server.tool()
+    @server.tool(annotations=ToolAnnotations(read_only_hint=True, open_world_hint=True))
     async def get_weather_forecast(
         city: City,
         days: Annotated[int, Field(ge=1, le=7, description="Forecast days (1 to 7).")] = 3,
@@ -52,7 +53,7 @@ def create_server(
         """Read 1–7 daily forecasts, with dates, temperatures and possible rainfall."""
         return await invoke(lambda: service.forecast(city, days))
 
-    @server.tool()
+    @server.tool(annotations=ToolAnnotations(read_only_hint=True, open_world_hint=True))
     async def compare_weather(first_city: City, second_city: City) -> ComparisonReport:
         """Compare current temperatures in two cities; first minus second, in °C."""
         return await invoke(lambda: service.compare(first_city, second_city))

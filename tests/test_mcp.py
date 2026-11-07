@@ -26,6 +26,7 @@ async def test_list_tools_and_schemas():
         assert "days" in by_name["get_weather_forecast"].input_schema["properties"]
         assert by_name["get_weather_forecast"].input_schema["properties"]["days"]["maximum"] == 7
         assert all(tool.description for tool in listing.tools)
+        assert all(tool.annotations and tool.annotations.read_only_hint for tool in listing.tools)
 
 
 @pytest.mark.asyncio

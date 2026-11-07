@@ -23,8 +23,8 @@ class CleanModel(BaseModel):
 
 
 class Location(CleanModel):
-    name: str = Field(min_length=1)
-    country: str | None = None
+    name: str = Field(min_length=1, max_length=100, pattern=r"^[^\\x00-\\x1f\\x7f<>]+$")
+    country: str | None = Field(default=None, max_length=100)
     latitude: float = Field(ge=-90, le=90)
     longitude: float = Field(ge=-180, le=180)
 
@@ -42,7 +42,7 @@ class CacheCurrent(CleanModel):
 class CachePayload(CleanModel):
     location: Location
     current: CacheCurrent
-    source: str = Field(min_length=1)
+    source: str = Field(min_length=1, max_length=40)
     cached: bool = False
 
 
