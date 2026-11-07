@@ -23,7 +23,7 @@ class CleanModel(BaseModel):
 
 
 class Location(CleanModel):
-    name: str = Field(min_length=1, max_length=100, pattern=r"^[^\\x00-\\x1f\\x7f<>]+$")
+    name: str = Field(min_length=1, max_length=100, pattern=r"^[^\x00-\x1f\x7f<>]+$")
     country: str | None = Field(default=None, max_length=100)
     latitude: float = Field(ge=-90, le=90)
     longitude: float = Field(ge=-180, le=180)
