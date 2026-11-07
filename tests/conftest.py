@@ -39,12 +39,14 @@ def mock_weather_service(sample_weather: dict[str, object]):
             return httpx.Response(
                 200,
                 json={
-                    "results": [{
-                        "name": "Berlin",
-                        "country": "Germany",
-                        "latitude": 52.52,
-                        "longitude": 13.41,
-                    }]
+                    "results": [
+                        {
+                            "name": "Berlin",
+                            "country": "Germany",
+                            "latitude": 52.52,
+                            "longitude": 13.41,
+                        }
+                    ]
                 },
             )
         if request.url.host == "api.open-meteo.com":

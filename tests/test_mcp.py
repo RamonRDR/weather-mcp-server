@@ -36,9 +36,7 @@ async def test_tool_calls_return_real_structured_content():
         assert not current.is_error
         assert current.structured_content["source"] == "mock-fixture"
         assert current.structured_content["temperature_c"] == 18
-        forecast = await client.call_tool(
-            "get_weather_forecast", {"city": "Berlin", "days": 2}
-        )
+        forecast = await client.call_tool("get_weather_forecast", {"city": "Berlin", "days": 2})
         assert not forecast.is_error
         assert len(forecast.structured_content["days"]) == 2
         comparison = await client.call_tool(

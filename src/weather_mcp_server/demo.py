@@ -23,11 +23,17 @@ async def run() -> None:
             ("get_weather_forecast", {"city": "Berlin", "days": 99}),
         ]:
             response = await client.call_tool(name, arguments)
-            print(json.dumps({
-                "tool": name,
-                "is_error": bool(response.is_error),
-                "structured": response.structured_content,
-            }, ensure_ascii=False, default=str))
+            print(
+                json.dumps(
+                    {
+                        "tool": name,
+                        "is_error": bool(response.is_error),
+                        "structured": response.structured_content,
+                    },
+                    ensure_ascii=False,
+                    default=str,
+                )
+            )
 
 
 def main() -> None:

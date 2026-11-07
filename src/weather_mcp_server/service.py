@@ -35,10 +35,7 @@ CURRENT_FIELDS = (
     "temperature_2m,relative_humidity_2m,apparent_temperature,"
     "precipitation,weather_code,wind_speed_10m"
 )
-DAILY_FIELDS = (
-    "temperature_2m_min,temperature_2m_max,"
-    "precipitation_probability_max,weather_code"
-)
+DAILY_FIELDS = "temperature_2m_min,temperature_2m_max,precipitation_probability_max,weather_code"
 WEATHER_CODES = {
     0: "Clear sky",
     1: "Mainly clear",
