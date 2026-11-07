@@ -89,7 +89,7 @@ async def test_city_not_found():
         transport=httpx.MockTransport(lambda _: httpx.Response(404))
     ) as client:
         with pytest.raises(CityNotFound):
-            await WeatherService(Settings(), client).current("Nowhere")
+            await WeatherService(Settings(backend="cache_api"), client).current("Nowhere")
 
 
 @pytest.mark.asyncio
@@ -98,7 +98,7 @@ async def test_http_error_is_not_exposed():
         transport=httpx.MockTransport(lambda _: httpx.Response(503, text="token=SECRET"))
     ) as client:
         with pytest.raises(WeatherUnavailable):
-            await WeatherService(Settings(), client).current("Berlin")
+            await WeatherService(Settings(backend="cache_api"), client).current("Berlin")
 
 
 @pytest.mark.asyncio
@@ -108,7 +108,7 @@ async def test_network_timeout():
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(timeout)) as client:
         with pytest.raises(WeatherTimeout):
-            await WeatherService(Settings(), client).current("Berlin")
+            await WeatherService(Settings(backend="cache_api"), client).current("Berlin")
 
 
 @pytest.mark.asyncio
@@ -117,7 +117,7 @@ async def test_invalid_json():
         transport=httpx.MockTransport(lambda _: httpx.Response(200, text="not json"))
     ) as client:
         with pytest.raises(InvalidWeatherPayload):
-            await WeatherService(Settings(), client).current("Berlin")
+            await WeatherService(Settings(backend="cache_api"), client).current("Berlin")
 
 
 @pytest.mark.asyncio
@@ -126,7 +126,7 @@ async def test_incomplete_payload():
         transport=httpx.MockTransport(lambda _: httpx.Response(200, json={"current": {}}))
     ) as client:
         with pytest.raises(InvalidWeatherPayload):
-            await WeatherService(Settings(), client).current("Berlin")
+            await WeatherService(Settings(backend="cache_api"), client).current("Berlin")
 
 
 @pytest.mark.asyncio
@@ -135,7 +135,7 @@ async def test_oversize_response():
         transport=httpx.MockTransport(lambda _: httpx.Response(200, text="a" * 100001))
     ) as client:
         with pytest.raises(InvalidWeatherPayload):
-            await WeatherService(Settings(), client).current("Berlin")
+            await WeatherService(Settings(backend="cache_api"), client).current("Berlin")
 
 
 @pytest.mark.asyncio
@@ -159,4 +159,4 @@ async def test_daily_array_length_mismatch():
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(InvalidWeatherPayload):
-            await WeatherService(Settings(), client).forecast("Berlin", 2)
+            await WeatherService(Settings(backend="cache_api"), client).forecast("Berlin", 2)

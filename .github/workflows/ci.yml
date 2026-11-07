@@ -29,8 +29,6 @@ jobs:
       - name: Ruff format
         run: ruff format --check .
       - name: Unit and MCP integration tests
-        env:
-          MCP_BACKEND: mock
         run: python -m pytest -q
       - name: Package build
         run: python -m build
