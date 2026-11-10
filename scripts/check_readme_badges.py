@@ -22,10 +22,7 @@ def main() -> int:
     if not cases:
         print("JUnit contains no testcase elements", file=sys.stderr)
         return 1
-    failed = sum(
-        any(child.tag in {"failure", "error"} for child in case)
-        for case in cases
-    )
+    failed = sum(any(child.tag in {"failure", "error"} for child in case) for case in cases)
     skipped = sum(any(child.tag == "skipped" for child in case) for case in cases)
     passed = len(cases) - failed - skipped
     inventories = []
