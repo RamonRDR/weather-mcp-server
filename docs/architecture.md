@@ -6,7 +6,7 @@ The server uses the **official MCP Python SDK 2.x** `MCPServer` class, with type
 
 ## 002: Cache API as current-weather backend, not an invented forecast endpoint
 
-The actual `RamonRDR/weather-cache-api` feature branch `feat/cycle-1-weather-cache` (its work is not merged into `main`) exposes:
+The actual `RamonRDR/weather-cache-api` current **main** branch exposes:
 - `GET /weather?city=...` for current data
 - `GET /metrics` for process-local metrics
 

@@ -29,7 +29,9 @@ jobs:
       - name: Ruff format
         run: ruff format --check .
       - name: Unit and MCP integration tests
-        run: python -m pytest -q
+        run: python -m pytest -q --junitxml=pytest-results.xml
+      - name: Verify README test badges against pytest results
+        run: python scripts/check_readme_badges.py pytest-results.xml
       - name: Package build
         run: python -m build
       - name: Validate package contents

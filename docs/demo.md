@@ -19,6 +19,6 @@ MCP_BACKEND=mock npx @modelcontextprotocol/inspector python -m weather_mcp_serve
 ```
 The Inspector is interactive, so manually inspect tools/list and call the three tools. This README does not claim an Inspector screenshot or a live-provider recording.
 
-**Optional real integration**: start the Weather Cache API from its own feature branch (requires its Redis setup), select `MCP_BACKEND=cache_api`, and run the MCP server via stdio. No real-provider calls are part of the required CI checks. Some upstream behavior depends on the other project's deployment and third-party availability.
+**Optional real integration**: start the Weather Cache API from its main branch (requires its Redis setup), select `MCP_BACKEND=cache_api`, and run the MCP server via stdio. No real-provider calls are part of the required CI checks. Some upstream behavior depends on the other project's deployment and third-party availability.
 
 Status statements should be based on actual GitHub Actions results, not assumed checks.
