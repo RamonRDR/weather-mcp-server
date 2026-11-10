@@ -195,7 +195,7 @@ O Python 3.14 foi confirmado no CI. MCP SDK `2.3+`, httpx `0.28+` e Pydantic Set
 
 Entradas têm limites de tamanho e de quantidade de dias. Destinos HTTP são fixos no código ou nas configurações controladas pelo operador, com HTTPS remoto obrigatório e redirecionamentos desabilitados. Timeouts e erros HTTP geram mensagens públicas sem segredos; logs ficam em stderr. Existe limitador por processo, **não** autenticação distribuída. Cidades ambíguas podem resolver para a primeira correspondência do provedor.
 
-A integração depende da branch ainda não incorporada da Weather Cache API, cuja execução é separada. Chamadas reais precisam de rede. O transporte HTTP remoto não foi implementado devido à necessidade de autenticação, proteção de origem e sessões. Consulte [decisões](docs/architecture.md) e [demonstração](docs/demo.md).
+A integração utiliza o contrato da Weather Cache API já disponível na branch **main** do projeto original. Sua execução continua separada e a comunicação real entre os dois serviços ainda não foi validada ponta a ponta. Chamadas reais precisam de rede. O transporte HTTP remoto não foi implementado devido à necessidade de autenticação, proteção de origem e sessões. Consulte [decisões](docs/architecture.md) e [demonstração](docs/demo.md).
 
 ## Contribuições
 
